@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        
+        <!-- Test Compute  -->
+        <record model="ir.ui.view" id="test_compute_view_form">
+            <field name="name">test.compute.form</field>
+            <field name="model">test.compute</field>
+            <field name="arch" type="xml">
+                <form string="Product" version="8.0">
+	                
+                    <sheet>
+                    	<group>
+                     		<field name ="name"/>
+                     		<field name ="amount"/>
+                    	</group>
+	              		
+	              		<notebook>
+                            <page string="Lines">
+                            	<field name ="line">
+	            				<tree editable="bottom">
+	            					<field name ="qty"/>
+	            					<field name ="price"/>
+	            					<field name ="amount"/>
+	            				</tree>
+	            			</field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        
+        <record model="ir.ui.view" id="test_compute_view_search">
+            <field name="name">test.compute.search</field>
+            <field name="model">test.compute</field>
+            <field eval="3" name="priority"/>
+            <field name="arch" type="xml">
+                <search string="Test Compute">
+                    <field name="name"/>
+                </search>
+            </field>
+        </record>
+        
+        <record id="test_compute_action" model="ir.actions.act_window">
+            <field name="name">test.compute.action</field>
+            <field name="res_model">test.compute</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="test_compute_view_search"/>
+        </record>
+    
+        
+     
+     <!-- Top menu item -->
+        <menuitem id="menu_test_compute_root" name="Test Compute" sequence="80"/>
+        <menuitem id="menu_tests" name="Tests" parent="menu_test_compute_root" sequence="1"/>
+        <menuitem id="menu_test_compute_form" name="Compute" action="test_compute_action" parent="menu_tests"/>
+        
+    </data>
+</openerp>
